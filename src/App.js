@@ -6,7 +6,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import Container from 'react-bootstrap/Container'
 import './App.css'
 
-const email = 'myemail@gmail.com'
+const email = 'thomas.fredj@hotmail.fr'
 const subject = 'Dota Wadafaaaak'
 
 function App () {
