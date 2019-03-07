@@ -7,7 +7,6 @@ import Container from 'react-bootstrap/Container'
 import './App.css'
 
 const email = 'windstormdota@hotmail.com'
-const subject = 'Dota Wadafaaaak'
 
 function App () {
   const [type, setType] = useState('')
@@ -24,6 +23,7 @@ function App () {
   const handleMinReplayChange = useCallback((e) => setMinReplay(e.currentTarget.value), [])
   const handleDescriptionChange = useCallback((e) => setDescription(e.currentTarget.value), [])
 
+  const subject = `Dota Wadafaaaak - ${type}`
   const emailBody = `# Type
 
 ${type}
