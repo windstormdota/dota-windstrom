@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Container from 'react-bootstrap/Container'
 import './App.css'
+import { sendEmail } from './send-email'
 
 const email = 'windstormdota@hotmail.com'
 
@@ -49,6 +50,12 @@ ${minReplay}
 ${description}
 `
 
+  const handleSubmit = useCallback(() => {
+    sendEmail({ type, gameID, playerName, heroes, minReplay, description })
+    .then((data) => console.log('data', data))
+    .catch((err) => console.log('error', err))
+  }, [])
+
   return (
       <Container className="App-container align-items-center justify-content-center">
         <Jumbotron className="">
@@ -78,7 +85,7 @@ ${description}
             <textarea className='form-control' id="description" name="description" required value={description} onChange={handleDescriptionChange} placeholder="Die like a noob" />
           </FormGroup>
           <a href={encodeURI(`mailto:${email}?subject=${subject}&body=${emailBody}`)}>
-            <Button className='form-control'>Create email</Button>
+            <Button className='form-control' onClick={handleSubmit}>Submit</Button>
           </a>
         </Jumbotron>
       </Container>
