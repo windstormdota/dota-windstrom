@@ -24,7 +24,7 @@ async function main () {
 	polka()
 		.use(serve)
 		.use(json())
-		.post('/api/send-email', (req, res) => {
+		.post('/api/send-email', async (req, res) => {
 			try {
 				const info = await transporter.sendMail({
 					from: '"Toto email <toto@toto.toto>',
