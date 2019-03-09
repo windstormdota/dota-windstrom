@@ -9,44 +9,91 @@ const { PORT = 80 } = process.env
 const buildDir = join(__dirname, 'build')
 const serve = serveStatic(buildDir)
 
-async function main () {
-	const account = await nodemailer.createTestAccount()
-	const transporter = nodemailer.createTransport({
-		host: "smtp.ethereal.email",
-		port: 587,
-		secure: false,
-		auth: {
-			user: account.user,
-			pass: account.pass,
+const transporter = nodemailer.createTransport({
+	service: "gmail",
+	auth: {
+		user: 'dota.windstrom@gmail.com',
+		pass: '!dota.windstrom123',
+	}
+})
+
+polka()
+	.use(serve)
+	.use(json())
+	.post('/api/send-email', async (req, res) => {
+		try {
+			const info = await transporter.sendMail({
+				from: 'dota windstrom',
+				to: 'dota.windstrom@gmail.com',
+				subject: `Dota Wadafaaaak - ${req.body.type}`,
+				text: getEmailText(req.body.type, req.body.gameID, req.body.playerName, req.body.heroes, req.body.minReplay, req.body.description),
+				html: getEmailText(req.body.type, req.body.gameID, req.body.playerName, req.body.heroes, req.body.minReplay, req.body.description, true),
+			})
+			res.writeHead(200);
+			res.end()
+		} catch (err) {
+			res.writeHead(500)
+			res.end(err.message)
 		}
 	})
+	.listen(PORT, (err) => {
+		if (err) throw err
+		console.log(`> Running on localhost:${PORT}`)
+	})	
 
-	polka()
-		.use(serve)
-		.use(json())
-		.post('/api/send-email', async (req, res) => {
-			try {
-				const info = await transporter.sendMail({
-					from: '"Toto email <toto@toto.toto>',
-					to: 'q300678@nwytg.net',
-					subject: 'Test: subject',
-					text: 'coucou this is text body',
-					html: '<h1> BOUZAAAA </h1>',
-				})
-				res.writeHead(200);
-				res.end()
-			} catch (err) {
-				res.writeHead(500)
-				res.end(err.message)
-			}
-		})
-		.listen(PORT, (err) => {
-			if (err) throw err
-			console.log(`> Running on localhost:${PORT}`)
-		})	
+function getEmailText(type, gameID, playerName, heroes, minReplay, description, isHtml = false) {
+	if (isHtml) {
+		return `<h3>Type</h3>
+
+${type}
+
+<h3>gameID</h3>
+
+${gameID}
+
+<h3>Player Name</h3>
+
+${playerName}
+
+<h3>Heroes</h3>
+
+${heroes}
+
+<h3>Min Replay</h3>
+
+${minReplay}
+
+<h3>Description</h3>
+
+${description}
+`
+	} else {
+		return `# Type
+
+${type}
+
+# gameID
+
+${gameID}
+
+# Player Name
+
+${playerName}
+
+# Heroes
+
+${heroes}
+
+# Min Replay
+
+${minReplay}
+
+# Description
+
+${description}
+`
+	}
 }
-
-main().catch(console.error)
 
 // Prevents heroku from "sleeping"
 setInterval(() => {

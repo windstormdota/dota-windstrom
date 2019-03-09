@@ -7,8 +7,6 @@ import Container from 'react-bootstrap/Container'
 import './App.css'
 import { sendEmail } from './send-email'
 
-const email = 'windstormdota@hotmail.com'
-
 function App () {
   const [type, setType] = useState('')
   const [gameID, setGameID] = useState('')
@@ -23,32 +21,6 @@ function App () {
   const handleHeroesChange = useCallback((e) => setHeroes(e.currentTarget.value), [])
   const handleMinReplayChange = useCallback((e) => setMinReplay(e.currentTarget.value), [])
   const handleDescriptionChange = useCallback((e) => setDescription(e.currentTarget.value), [])
-
-  const subject = `Dota Wadafaaaak - ${type}`
-  const emailBody = `# Type
-
-${type}
-
-# gameID
-
-${gameID}
-
-# Player Name
-
-${playerName}
-
-# Heroes
-
-${heroes}
-
-# Min Replay
-
-${minReplay}
-
-# Description
-
-${description}
-`
 
   const handleSubmit = useCallback(() => {
     sendEmail({ type, gameID, playerName, heroes, minReplay, description })
@@ -84,9 +56,7 @@ ${description}
             <FormLabel htmlFor="description">Description</FormLabel>
             <textarea className='form-control' id="description" name="description" required value={description} onChange={handleDescriptionChange} placeholder="Die like a noob" />
           </FormGroup>
-          <a href={encodeURI(`mailto:${email}?subject=${subject}&body=${emailBody}`)}>
-            <Button className='form-control' onClick={handleSubmit}>Submit</Button>
-          </a>
+          <Button className='form-control' onClick={handleSubmit}>Submit</Button>
         </Jumbotron>
       </Container>
   )
