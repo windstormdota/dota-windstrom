@@ -54,7 +54,7 @@ ${description}
     sendEmail({ type, gameID, playerName, heroes, minReplay, description })
     .then((data) => console.log('data', data))
     .catch((err) => console.log('error', err))
-  }, [])
+  }, [type, gameID, playerName, heroes, minReplay, description])
 
   return (
       <Container className="App-container align-items-center justify-content-center">
