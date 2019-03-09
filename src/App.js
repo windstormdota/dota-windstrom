@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react'
+import Form from 'react-bootstrap/Form'
 import FormGroup from 'react-bootstrap/FormGroup'
 import FormLabel from 'react-bootstrap/FormLabel'
 import Button from 'react-bootstrap/Button'
@@ -7,6 +8,12 @@ import Container from 'react-bootstrap/Container'
 import './App.css'
 import { sendEmail } from './send-email'
 
+const STATUS = {
+  PENDING: 'PENDING',
+  SUCCESS: 'SUCCESS',
+  ERROR: 'ERROR',
+}
+
 function App () {
   const [type, setType] = useState('')
   const [gameID, setGameID] = useState('')
@@ -14,6 +21,7 @@ function App () {
   const [heroes, setHeroes] = useState('')
   const [minReplay, setMinReplay] = useState('')
   const [description, setDescription] = useState('')
+  const [status, setStatus] = useState('')
 
   const handleTypeChange = useCallback((e) => setType(e.currentTarget.value), [])
   const handleGameIDChange = useCallback((e) => setGameID(e.currentTarget.value), [])
@@ -22,41 +30,69 @@ function App () {
   const handleMinReplayChange = useCallback((e) => setMinReplay(e.currentTarget.value), [])
   const handleDescriptionChange = useCallback((e) => setDescription(e.currentTarget.value), [])
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback((e) => {
+    e.preventDefault()
+
+    setStatus(STATUS.PENDING)
+
     sendEmail({ type, gameID, playerName, heroes, minReplay, description })
-    .then((data) => console.log('data', data))
-    .catch((err) => console.log('error', err))
+      .then((response) => {
+        if (response.status === 200) {
+          setType('')
+          setGameID('')
+          setDescription('')
+          setHeroes('')
+          setPlayerName('')
+          setMinReplay('')
+          setStatus(STATUS.SUCCESS)
+        } else {
+          setStatus(STATUS.ERROR)
+        }
+      })
+      .catch((err) => setStatus(STATUS.ERROR))
   }, [type, gameID, playerName, heroes, minReplay, description])
+
+  const renderStatus = useCallback(() => {
+    if (!status) return null
+    if (status === STATUS.PENDING) return <div class="lds-hourglass" />
+    if (status === STATUS.ERROR)  return <div className="alert alert-danger" role="alert">We were unable to send your data ! 😞</div>
+    if (status === STATUS.SUCCESS) return <div className="alert alert-success" role="alert">Data uploaded with success ! 🎉</div>
+  }, [status])
 
   return (
       <Container className="App-container align-items-center justify-content-center">
         <Jumbotron className="">
           <h1 className='display-4'>Submit your Clip</h1>
-          <FormGroup>
-            <FormLabel htmlFor="type">Type</FormLabel>
-            <input className='form-control' type="text" required id="type" name="type" value={type} onChange={handleTypeChange} placeholder="Win / Fail / Rampage..." />
-          </FormGroup>
-          <FormGroup>
-            <FormLabel htmlFor="gameID">Game ID</FormLabel>
-            <input className='form-control' type="text" required id="gameID" name="Game ID" value={gameID} onChange={handleGameIDChange} placeholder="123456789" />
-          </FormGroup>
-          <FormGroup>
-            <FormLabel htmlFor="playerName">Player Name</FormLabel>
-            <input className='form-control' type="text" required id="playerName" name="Player Name" value={playerName} onChange={handlePlayerNameChange} placeholder="WindStorm" />
-          </FormGroup>
-          <FormGroup>
-            <FormLabel htmlFor="heroes">Heroes</FormLabel>
-            <input className='form-control' type="text" id="heroes" name="heroes" required value={heroes} onChange={handleHeroesChange} placeholder="Earth Spirit" />
-          </FormGroup>
-          <FormGroup>
-            <FormLabel htmlFor="min replay">Min Replay</FormLabel>
-            <input className='form-control' type="text" id="min replay" name="min replay" required value={minReplay} onChange={handleMinReplayChange} placeholder="12" />
-          </FormGroup>
-          <FormGroup>
-            <FormLabel htmlFor="description">Description</FormLabel>
-            <textarea className='form-control' id="description" name="description" required value={description} onChange={handleDescriptionChange} placeholder="Die like a noob" />
-          </FormGroup>
-          <Button className='form-control' onClick={handleSubmit}>Submit</Button>
+          <Form onSubmit={handleSubmit}>
+            <FormGroup>
+              <FormLabel htmlFor="type">Type</FormLabel>
+              <input className='form-control' type="text" required id="type" name="type" value={type} onChange={handleTypeChange} placeholder="Win / Fail / Rampage..." autoFocus />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel htmlFor="gameID">Game ID</FormLabel>
+              <input className='form-control' type="text" required id="gameID" name="Game ID" value={gameID} onChange={handleGameIDChange} placeholder="123456789" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel htmlFor="playerName">Player Name</FormLabel>
+              <input className='form-control' type="text" required id="playerName" name="Player Name" value={playerName} onChange={handlePlayerNameChange} placeholder="WindStorm" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel htmlFor="heroes">Heroes</FormLabel>
+              <input className='form-control' type="text" id="heroes" name="heroes" required value={heroes} onChange={handleHeroesChange} placeholder="Earth Spirit" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel htmlFor="min replay">Min Replay</FormLabel>
+              <input className='form-control' type="text" id="min replay" name="min replay" required value={minReplay} onChange={handleMinReplayChange} placeholder="12" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel htmlFor="description">Description</FormLabel>
+              <textarea className='form-control' id="description" name="description" required value={description} onChange={handleDescriptionChange} placeholder="Die like a noob" />
+            </FormGroup>
+            <FormGroup className="text-center">
+              <Button type="submit" className='form-control mb-3' disabled={status === STATUS.PENDING}>Submit</Button>
+              {renderStatus()}
+            </FormGroup>
+          </Form>
         </Jumbotron>
       </Container>
   )

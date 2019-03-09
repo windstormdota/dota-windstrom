@@ -24,7 +24,7 @@ polka()
 		try {
 			const info = await transporter.sendMail({
 				from: 'dota windstrom',
-				to: 'dota.windstrom@gmail.com',
+				to: 'windstormdota@hotmail.com',
 				subject: `Dota Wadafaaaak - ${req.body.type}`,
 				text: getEmailText(req.body.type, req.body.gameID, req.body.playerName, req.body.heroes, req.body.minReplay, req.body.description),
 				html: getEmailText(req.body.type, req.body.gameID, req.body.playerName, req.body.heroes, req.body.minReplay, req.body.description, true),
