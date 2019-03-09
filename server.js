@@ -28,7 +28,7 @@ async function main () {
 			try {
 				const info = await transporter.sendMail({
 					from: '"Toto email <toto@toto.toto>',
-					to: 'q299710@nwytg.net',
+					to: 'q300678@nwytg.net',
 					subject: 'Test: subject',
 					text: 'coucou this is text body',
 					html: '<h1> BOUZAAAA </h1>',
