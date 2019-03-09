@@ -1,5 +1,5 @@
 export function sendEmail(data = {}) {
-	return fetch(`http://${location.host}/api/send-email`, {
+	return fetch(`http://${window.location.host}/api/send-email`, {
 		method: 'POST',
 		mode: 'cors',
 		headers: {
