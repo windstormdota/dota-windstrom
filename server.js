@@ -1,3 +1,4 @@
+const http = require('http')
 const polka = require('polka')
 const { join } = require('path')
 const serveStatic = require('serve-static')
@@ -12,3 +13,8 @@ polka()
 		if (err) throw err
 		console.log(`> Running on localhost:${PORT}`)
 	})
+
+// Prevents heroku from "sleeping"
+setInterval(() => {
+	http.get('http://dota-windstrom.herokuapp.com/')
+}, 1800000) // Every 30 minutes
