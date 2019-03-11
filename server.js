@@ -98,4 +98,4 @@ ${description}
 // Prevents heroku from "sleeping"
 setInterval(() => {
 	http.get('http://dota-windstrom.herokuapp.com/')
-}, 1800000) // Every 30 minutes
+}, 300000) // Every 5 minutes
