@@ -70,7 +70,7 @@ function App () {
             </FormGroup>
             <FormGroup>
               <FormLabel htmlFor="gameID">Game ID</FormLabel>
-              <input className='form-control' type="text" required id="gameID" name="Game ID" value={gameID} onChange={handleGameIDChange} placeholder="123456789" />
+              <input className='form-control' type="text" required id="gameID" name="Game ID" value={gameID} onChange={handleGameIDChange} placeholder="123456789 (obligatoire)" />
             </FormGroup>
             <FormGroup>
               <FormLabel htmlFor="playerName">Player Name</FormLabel>
@@ -86,7 +86,7 @@ function App () {
             </FormGroup>
             <FormGroup>
               <FormLabel htmlFor="description">Description</FormLabel>
-              <textarea className='form-control' id="description" name="description" required value={description} onChange={handleDescriptionChange} placeholder="Die like a noob" />
+              <textarea className='form-control' id="description" name="description" required value={description} onChange={handleDescriptionChange} placeholder="Die like a noob (soyez le plus précis possible)" />
             </FormGroup>
             <FormGroup className="text-center">
               <Button type="submit" className='form-control mb-3' disabled={status === STATUS.PENDING}>Submit</Button>
