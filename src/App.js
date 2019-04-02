@@ -66,7 +66,7 @@ function App () {
           <Form onSubmit={handleSubmit}>
             <FormGroup>
               <FormLabel htmlFor="type">Type</FormLabel>
-              <input className='form-control' type="text" required id="type" name="type" value={type} onChange={handleTypeChange} placeholder="Win / Fail / Rampage..." autoFocus />
+              <input className='form-control' type="text" required id="type" name="type" value={type} onChange={handleTypeChange} placeholder="Rampage / Fail / Save / Juke / Dodge..." autoFocus />
             </FormGroup>
             <FormGroup>
               <FormLabel htmlFor="gameID">Game ID</FormLabel>
