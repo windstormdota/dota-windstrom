@@ -95,7 +95,14 @@ ${description}
 	}
 }
 
-// Prevents heroku from "sleeping"
 setInterval(() => {
+	const hour = new Date().getHours()
+
+	if (hour > 0 && hour < 10) {
+		// Do nothing if between 1 and 9 am
+		return
+	}
+
+	// Prevents heroku from "sleeping"
 	http.get('http://dota-windstrom.herokuapp.com/')
 }, 300000) // Every 5 minutes
