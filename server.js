@@ -95,7 +95,7 @@ ${description}
 	}
 }
 
-setInterval(() => {
+// setInterval(() => {
 	// Prevents heroku from "sleeping"
-	http.get('http://dota-windstrom.herokuapp.com/')
-}, 300000) // Every 5 minutes
+	// http.get('http://dota-windstrom.herokuapp.com/')
+// }, 300000) // Every 5 minutes
