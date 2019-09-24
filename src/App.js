@@ -80,7 +80,7 @@ function App () {
             </FormGroup>
             <FormGroup>
               <FormLabel htmlFor="division">Division</FormLabel>
-              <input className='form-control' type="text" required id="division" name="Division" value={division} onChange={handleDivisionChange} placeholder="wood" />
+              <input className='form-control' type="text" required id="division" name="Division" value={division} onChange={handleDivisionChange} placeholder="d1" />
             </FormGroup>
             <FormGroup>
               <FormLabel htmlFor="team">Team</FormLabel>
