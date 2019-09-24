@@ -17,6 +17,8 @@ const STATUS = {
 function App () {
   const [type, setType] = useState('')
   const [gameID, setGameID] = useState('')
+  const [division, setDivision] = useState('')
+  const [team, setTeam] = useState('')
   const [playerName, setPlayerName] = useState('')
   const [heroes, setHeroes] = useState('')
   const [minReplay, setMinReplay] = useState('')
@@ -25,6 +27,8 @@ function App () {
 
   const handleTypeChange = useCallback((e) => setType(e.currentTarget.value), [])
   const handleGameIDChange = useCallback((e) => setGameID(e.currentTarget.value), [])
+  const handleDivisionChange = useCallback((e) => setDivision(e.currentTarget.value), [])
+  const handleTeamChange = useCallback((e) => setTeam(e.currentTarget.value), [])
   const handlePlayerNameChange = useCallback((e) => setPlayerName(e.currentTarget.value), [])
   const handleHeroesChange = useCallback((e) => setHeroes(e.currentTarget.value), [])
   const handleMinReplayChange = useCallback((e) => setMinReplay(e.currentTarget.value), [])
@@ -35,11 +39,13 @@ function App () {
 
     setStatus(STATUS.PENDING)
 
-    sendEmail({ type, gameID, playerName, heroes, minReplay, description })
+    sendEmail({ type, gameID, division, team, playerName, heroes, minReplay, description })
       .then((response) => {
         if (response.status === 200) {
           setType('')
           setGameID('')
+          setDivision('')
+          setTeam('')
           setDescription('')
           setHeroes('')
           setPlayerName('')
@@ -50,7 +56,7 @@ function App () {
         }
       })
       .catch((err) => setStatus(STATUS.ERROR))
-  }, [type, gameID, playerName, heroes, minReplay, description])
+  }, [type, gameID, division, team, playerName, heroes, minReplay, description])
 
   const renderStatus = useCallback(() => {
     if (!status) return null
@@ -71,6 +77,14 @@ function App () {
             <FormGroup>
               <FormLabel htmlFor="gameID">Game ID</FormLabel>
               <input className='form-control' type="text" required id="gameID" name="Game ID" value={gameID} onChange={handleGameIDChange} placeholder="123456789 (obligatoire)" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel htmlFor="division">Division</FormLabel>
+              <input className='form-control' type="text" required id="division" name="Division" value={division} onChange={handleDivisionChange} placeholder="wood" />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel htmlFor="team">Team</FormLabel>
+              <input className='form-control' type="text" required id="team" name="Team" value={team} onChange={handleTeamChange} placeholder="The Feeders" />
             </FormGroup>
             <FormGroup>
               <FormLabel htmlFor="playerName">Player Name</FormLabel>

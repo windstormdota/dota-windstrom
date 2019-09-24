@@ -22,12 +22,13 @@ polka()
 	.use(json())
 	.post('/api/send-email', async (req, res) => {
 		try {
+			const { type, gameID, division, team, playerName, heroes, minReplay, description } = req.body
 			const info = await transporter.sendMail({
 				from: 'dota windstrom',
 				to: 'windstormdota@hotmail.com',
-				subject: `Dota Wadafaaaak - ${req.body.type}`,
-				text: getEmailText(req.body.type, req.body.gameID, req.body.playerName, req.body.heroes, req.body.minReplay, req.body.description),
-				html: getEmailText(req.body.type, req.body.gameID, req.body.playerName, req.body.heroes, req.body.minReplay, req.body.description, true),
+				subject: `Dota Wadafaaaak - ${type}`,
+				text: getEmailText(type, gameID, division, team, playerName, heroes, minReplay, description),
+				html: getEmailText(type, gameID, division, team, playerName, heroes, minReplay, description, true),
 			})
 			res.writeHead(200);
 			res.end()
@@ -41,7 +42,7 @@ polka()
 		console.log(`> Running on localhost:${PORT}`)
 	})	
 
-function getEmailText(type, gameID, playerName, heroes, minReplay, description, isHtml = false) {
+function getEmailText(type, gameID, division, team, playerName, heroes, minReplay, description, isHtml = false) {
 	if (isHtml) {
 		return `<h3>Type</h3>
 
@@ -75,6 +76,14 @@ ${type}
 # gameID
 
 ${gameID}
+
+# Division
+
+${division}
+
+# Team
+
+${team}
 
 # Player Name
 
