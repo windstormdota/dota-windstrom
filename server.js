@@ -33,6 +33,7 @@ polka()
 			res.writeHead(200);
 			res.end()
 		} catch (err) {
+			console.log('err', err)
 			res.writeHead(500)
 			res.end(err.message)
 		}
@@ -51,6 +52,14 @@ ${type}
 <h3>gameID</h3>
 
 ${gameID}
+
+<h3>Division</h3>
+
+${division}
+
+<h3>Team</h3>
+
+${team}
 
 <h3>Player Name</h3>
 

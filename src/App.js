@@ -83,8 +83,8 @@ function App () {
               <input className='form-control' type="text" required id="division" name="Division" value={division} onChange={handleDivisionChange} placeholder="d1" />
             </FormGroup>
             <FormGroup>
-              <FormLabel htmlFor="team">Team</FormLabel>
-              <input className='form-control' type="text" required id="team" name="Team" value={team} onChange={handleTeamChange} placeholder="The Feeders" />
+              <FormLabel htmlFor="team">Teams</FormLabel>
+              <input className='form-control' type="text" required id="team" name="Team" value={team} onChange={handleTeamChange} placeholder="The Feeders vs The Masters" />
             </FormGroup>
             <FormGroup>
               <FormLabel htmlFor="playerName">Player Name</FormLabel>
