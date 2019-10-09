@@ -10,10 +10,15 @@ const buildDir = join(__dirname, 'build')
 const serve = serveStatic(buildDir)
 
 const transporter = nodemailer.createTransport({
-	service: "gmail",
+	service: "smtp.gmail.com",
+	port: 465,
+	secure: true,
 	auth: {
 		user: 'dota.windstrom@gmail.com',
 		pass: '!dota.windstrom123',
+	},
+	tls: {
+		rejectUnauthorized: false,
 	}
 })
 
@@ -33,7 +38,6 @@ polka()
 			res.writeHead(200);
 			res.end()
 		} catch (err) {
-			console.log('err', err)
 			res.writeHead(500)
 			res.end(err.message)
 		}
