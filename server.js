@@ -10,15 +10,10 @@ const buildDir = join(__dirname, 'build')
 const serve = serveStatic(buildDir)
 
 const transporter = nodemailer.createTransport({
-	service: "smtp.gmail.com",
-	port: 465,
-	secure: true,
+	service: "gmail",
 	auth: {
 		user: 'dota.windstrom@gmail.com',
 		pass: '!dota.windstrom123',
-	},
-	tls: {
-		rejectUnauthorized: false,
 	}
 })
 
