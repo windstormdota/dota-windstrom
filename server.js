@@ -1,3 +1,4 @@
+require('dotenv').config()
 const http = require('http')
 const polka = require('polka')
 const { join } = require('path')
@@ -5,15 +6,15 @@ const serveStatic = require('serve-static')
 const { json } = require('body-parser')
 const nodemailer = require('nodemailer')
 
-const { PORT = 80 } = process.env
+const { PORT = 80, MAIL_USERNAME, MAIL_PASSWORD } = process.env
 const buildDir = join(__dirname, 'build')
 const serve = serveStatic(buildDir)
 
 const transporter = nodemailer.createTransport({
 	service: "gmail",
 	auth: {
-		user: 'dota.windstrom@gmail.com',
-		pass: '!dota.windstrom123',
+		user: MAIL_USERNAME,
+		pass: MAIL_PASSWORD,
 	}
 })
 
