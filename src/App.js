@@ -60,7 +60,7 @@ function App () {
 
   const renderStatus = useCallback(() => {
     if (!status) return null
-    if (status === STATUS.PENDING) return <div class="lds-hourglass" />
+    if (status === STATUS.PENDING) return <div className="lds-hourglass" />
     if (status === STATUS.ERROR)  return <div className="alert alert-danger" role="alert">We were unable to send your data ! 😞</div>
     if (status === STATUS.SUCCESS) return <div className="alert alert-success" role="alert">Data uploaded with success ! 🎉</div>
   }, [status])
