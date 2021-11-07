@@ -23,7 +23,7 @@ polka()
 	.use(json())
 	.post('/api/send-email', async (req, res) => {
 		try {
-			const { type, gameID, division, team, playerName, heroes, minReplay, description/Clip Twitch } = req.body
+			const { type, gameID, division, team, playerName, heroes, minReplay, description } = req.body
 			const info = await transporter.sendMail({
 				from: 'dota windstrom',
 				to: 'windstormdota@hotmail.com',
@@ -73,7 +73,7 @@ ${heroes}
 
 ${minReplay}
 
-<h3>Description</h3>
+<h3>Description/Clip Twitch</h3>
 
 ${description}
 `
@@ -106,7 +106,7 @@ ${heroes}
 
 ${minReplay}
 
-# Description
+# Description/Clip Twitch
 
 ${description}
 `
