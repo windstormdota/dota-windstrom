@@ -106,7 +106,7 @@ ${heroes}
 
 ${minReplay}
 
-# Description
+# Description/Clip Twitch
 
 ${description}
 `
