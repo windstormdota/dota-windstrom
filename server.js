@@ -73,7 +73,7 @@ ${heroes}
 
 ${minReplay}
 
-<h3>Description/Clip Twitch</h3>
+<h3>Description | Clip Twitch</h3>
 
 ${description}
 `
@@ -106,7 +106,7 @@ ${heroes}
 
 ${minReplay}
 
-# Description/Clip Twitch
+# Description | Clip Twitch
 
 ${description}
 `
