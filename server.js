@@ -28,8 +28,8 @@ polka()
 				from: 'dota windstrom',
 				to: 'windstormdota@hotmail.com',
 				subject: `Dota Wadafaaaak - ${type}`,
-				text: getEmailText(type, gameID, division, team, playerName, heroes, minReplay, description/Clip Twitch),
-				html: getEmailText(type, gameID, division, team, playerName, heroes, minReplay, description/Clip Twitch, true),
+				text: getEmailText(type, gameID, division, team, playerName, heroes, minReplay, description),
+				html: getEmailText(type, gameID, division, team, playerName, heroes, minReplay, description, true),
 			})
 			res.writeHead(200);
 			res.end()
@@ -43,7 +43,7 @@ polka()
 		console.log(`> Running on localhost:${PORT}`)
 	})	
 
-function getEmailText(type, gameID, division, team, playerName, heroes, minReplay, description/Clip Twitch, isHtml = false) {
+function getEmailText(type, gameID, division, team, playerName, heroes, minReplay, description, isHtml = false) {
 	if (isHtml) {
 		return `<h3>Type</h3>
 
@@ -73,7 +73,7 @@ ${heroes}
 
 ${minReplay}
 
-<h3>Description/Clip Twitch</h3>
+<h3>Description</h3>
 
 ${description}
 `
@@ -106,7 +106,7 @@ ${heroes}
 
 ${minReplay}
 
-# Description/Clip Twitch
+# Description
 
 ${description}
 `
