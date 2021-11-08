@@ -100,7 +100,7 @@ function App () {
             </FormGroup>
             <FormGroup>
               <FormLabel htmlFor="Description - Clip Twitch">Description - Clip Twitch</FormLabel>
-              <textarea className='form-control' id="description" name="Description - Clip Twitch" required value={description} onChange={handleDescriptionChange} placeholder="Die like a noob (soyez le plus précis possible)" />
+              <textarea className='form-control' id="description" name="Description - Clip Twitch" required value={description} onChange={handleDescriptionChange} placeholder="Die like a noob (soyez le plus précis possible ou Clip Twitch)" />
             </FormGroup>
             <FormGroup className="text-center">
               <Button type="submit" className='form-control mb-3' disabled={status === STATUS.PENDING}>Submit</Button>
