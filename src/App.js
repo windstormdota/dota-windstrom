@@ -68,7 +68,7 @@ function App () {
   return (
       <Container className="App-container align-items-center justify-content-center">
         <Jumbotron className="">
-          <h1 className='display-4'>Submit your Clip</h1>
+          <h1 className='display-4'>Submit your Clip for FTVLeague</h1>
           <Form onSubmit={handleSubmit}>
             <FormGroup>
               <FormLabel htmlFor="type">Type</FormLabel>
